@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "autofish",
+  "version": "1.1.0",
+
+  "name": "Simple Autofish",
+  "description": "Automatically fishes for you.",
+  "authors": [
+    "Genesis"
+  ],
+  "contact": {
+    "homepage": "https://genesishacks.github.io/"
+
+  },
+
+  "license": "MIT",
+  "icon": "assets/autofish/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.genesis.autofish.Autofish"
+    ]
+  },
+  "mixins": [
+    "autofish.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
