@@ -1,6 +1,7 @@
 package net.genesis.autofish.mixin;
 
 
+import net.genesis.autofish.Autofish;
 import net.minecraft.util.Hand;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.data.TrackedData;
@@ -18,15 +19,22 @@ public abstract class AutofishMixin {
 
 	@Inject(at = {@At("TAIL")}, method = {"onTrackedDataSet"})
 	public void onTrackedDataSet(TrackedData<?> data, CallbackInfo ci) throws InterruptedException {
+		if (Autofish.vkeyBinding.wasPressed()) {
+			Autofish.on = !Autofish.on;
 
+		}
 
 		MinecraftClient client = MinecraftClient.getInstance();
 		if (caughtFish) {
 
 
-			client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
-			Thread.sleep(5L);
-			client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
+
+			if (!Autofish.on){
+				client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
+				Thread.sleep(5L);
+				client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
+			}
+
 		}
 	}
 }

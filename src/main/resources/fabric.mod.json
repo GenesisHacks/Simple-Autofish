@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "autofish",
-  "version": "1.1.0",
+  "version": "1.2.0",
 
   "name": "Simple Autofish",
   "description": "Automatically fishes for you.",
