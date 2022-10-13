@@ -12,10 +12,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Objects;
+
 @Mixin(FishingBobberEntity.class)
 public abstract class AutofishMixin {
 	@Shadow
 	private boolean caughtFish;
+
+
 
 	@Inject(at = {@At("TAIL")}, method = {"onTrackedDataSet"})
 	public void onTrackedDataSet(TrackedData<?> data, CallbackInfo ci) throws InterruptedException {
@@ -24,11 +28,11 @@ public abstract class AutofishMixin {
 
 		}
 
+		FishingBobberEntity bobber = (FishingBobberEntity)(Object) this;
+
 		MinecraftClient client = MinecraftClient.getInstance();
-		if (caughtFish) {
 
-
-
+		if (caughtFish && Objects.requireNonNull(client.player).equals(bobber.getPlayerOwner())) {
 			if (!Autofish.on){
 				client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
 				Thread.sleep(5L);
