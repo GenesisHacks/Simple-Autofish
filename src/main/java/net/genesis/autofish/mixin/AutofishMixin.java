@@ -3,6 +3,7 @@ package net.genesis.autofish.mixin;
 
 import net.genesis.autofish.Autofish;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.data.TrackedData;
@@ -21,6 +22,10 @@ public abstract class AutofishMixin {
 	private boolean caughtFish;
 
 
+	@Shadow
+	public abstract PlayerEntity getPlayerOwner();
+
+
 
 	@Inject(at = {@At("TAIL")}, method = {"onTrackedDataSet"})
 	public void onTrackedDataSet(TrackedData<?> data, CallbackInfo ci) throws InterruptedException {
@@ -28,12 +33,9 @@ public abstract class AutofishMixin {
 			Autofish.on = !Autofish.on;
 
 		}
-
-		FishingBobberEntity bobber = (FishingBobberEntity)(Object) this;
-
 		MinecraftClient client = MinecraftClient.getInstance();
 
-		if (caughtFish && bobber.getPlayerOwner() instanceof ClientPlayerEntity) {
+		if (caughtFish && getPlayerOwner() instanceof ClientPlayerEntity) {
 			if (!Autofish.on){
 				client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
 				Thread.sleep(5L);
