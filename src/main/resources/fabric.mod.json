@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "autofish",
-  "version": "1.2.0",
+  "version": "${version}",
 
   "name": "Simple Autofish",
   "description": "Automatically fishes for you.",
@@ -9,12 +9,12 @@
     "Genesis"
   ],
   "contact": {
-    "homepage": "https://genesishacks.github.io/"
-
+    "homepage": "https://genesishacks.com/",
+    "sources": "https://github.com/GenesisHacks/Simple-Autofish"
   },
 
   "license": "MIT",
-  "icon": "assets/autofish/icon.png",
+  "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -23,13 +23,13 @@
     ]
   },
   "mixins": [
-    "autofish.mixins.json"
+    "modid.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.6",
-    "fabric": "*",
-    "minecraft": "~1.19",
+    "fabricloader": ">=0.14.11",
+    "fabric-api": "*",
+    "minecraft": "~1.19.3",
     "java": ">=17"
   },
   "suggests": {
